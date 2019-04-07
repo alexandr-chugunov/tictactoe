@@ -6,256 +6,176 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>tictactoe</title>
         <style>
+		.картинка{
+                	position:fixed;
+                	right:120vh;
+        		bottom:65vh;
+		        width:300px;
+        		height:300px;
+        		-ms-user-select: none; 
+       			-moz-user-select: none; 
+       			-webkit-user-select: none; 
+         		user-select: none; 
+	          }
+	         .калькулятор{        
+		        position:fixed;
+        		background-color:#000000; 
+        		user-select:none; 
+		        right:90vh;
+			bottom:5vh;
+			width:340px;
+			height:340px;
+			border:1px solid;
 
-          .картинка{
-                position:fixed;
-                right:120vh;
-        bottom:65vh;
-        width:300px;
-        height:300px;
-        -ms-user-select: none; 
-       -moz-user-select: none; 
-       -webkit-user-select: none; 
-         user-select: none; 
-
-                  
-
-          }
-
-         .калькулятор{        
-         
-        position:fixed;
-        background-color:#000000; 
-        user-select:none; 
-       
-        right:90vh;
-        bottom:5vh;
-        width:340px;
-        height:340px;
-        border:1px solid;
-        
-        overflow:hidden;
-        border: solid 3px #000000;
-        }
-       
-    
-        
- 
-        .клетка{                      
-		display: inline-block;
-		
+			overflow:hidden;
+			border: solid 3px #000000;
+		}
+	        .клетка{                      
+			display: inline-block;
 			border: solid 2px #2ff;
-			
 			margin: 1px;
 			border: solid 2px #000000;
-			
 			width: 100px; height: 100px;
 			background-color: white;
 			font-size: 70px;
 			text-align: center;
 			cursor: pointer;
-			
 			transition: all 0.2s ease;
-            -ms-user-select: none; 
-       -moz-user-select: none; 
-       -webkit-user-select: none; 
-         user-select: none; 
-        
-        }
-        
-         .клетка:hover{                       
-	    color: black;
-	  cursor: pointer;
-	    box-shadow:0px 0px 90px green, 0px 0px 50px blue;
-	    
-	}
-    .символ{
-display: inline-block;
-width: 50px;
-height: 50px;
-border: solid 2px #000000;
-font-size: 50px;
+			-ms-user-select: none; 
+			-moz-user-select: none; 
+			-webkit-user-select: none; 
+			user-select: none; 
+	        }
+		.клетка:hover{                       
+			color: black;
+			cursor: pointer;
+			box-shadow:0px 0px 90px green, 0px 0px 50px blue;
+		}
+		.символ{
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			border: solid 2px #000000;
+			font-size: 50px;
 
-text-align: center;
-    margin: 1px;
-    }
-    .символ:hover{                       
-	    color: black;
-	  cursor: pointer;
-        width: 60px;
-height: 60px;
-
-	    
-	}
-        .поля_игр{
-            
-     display: inline-block;
-       width: 350px;
-       height: 500px;
-        border: solid 2px #000000;
-       font-size: 50px;
-       top: 250px;
-        text-align: center;
-        margin: 1px;
-    }
-
-
-
-        
-       
-        
-               </style>
-
-
+			text-align: center;
+			margin: 1px;
+    		}
+    		.символ:hover{                       
+			color: black;
+			cursor: pointer;
+			width: 60px;
+			height: 60px;
+		}
+	        .поля_игр{
+			display: inline-block;
+			width: 350px;
+			height: 500px;
+			border: solid 2px #000000;
+			font-size: 50px;
+			top: 250px;
+			text-align: center;
+			margin: 1px;
+		}
+	</style>
 </head>
-               <script	src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-               </script>
-        
-            <script type="text/javascript" >   
-               	var играХО={
-                  игрок: '',
-                  номер:'',
-           
-           
-                  список_игр:function(номер){
-                  $.ajax({
-					url:'/node/запрос',
-					type:'POST',
-					dataType:'json',
-					data:{
-						игрок: играХО.игрок,
-                                    ход:_параметры.клетка
-                                    
-					},
-					success: function(_ответ){
+<script	src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+</script>
+<!-- внимание, вопрос: зачем второй раз подгружать jquery? -->
+<script type="text/javascript" >   
+	var играХО={
+		игрок: '',
+		номер:'',
+		список_игр:function(номер){
+			$.ajax({
+				url:'/node/запрос',
+				type:'POST',
+				dataType:'json',
+				data:{
+					игрок: играХО.игрок,
+                                	ход:_параметры.клетка
+				},
+				success: function(_ответ){
                                     ник;
-					}
-				});
-
-                  
-            },
-
-
- 
-            старт:function(){
-                        console.log("клетка="+_параметры.клетка);
-				$.ajax({
-					url:'/node/запрос',
-					type:'POST',
-					dataType:'json',
-					data:{
-						игрок: играХО.игрок,
-                                    ход:_параметры.клетка
-                                    
-					},
-					success: function(_ответ){
+				}
+			});
+		},
+		старт:function(){
+			console.log("клетка="+_параметры.клетка);
+			$.ajax({
+				url:'/node/запрос',
+				type:'POST',
+				dataType:'json',
+				data:{
+					игрок: играХО.игрок,
+                        		ход:_параметры.клетка
+				},
+				success: function(_ответ){
                                     номер;
-					}
-				});
-				
+				}
+			});
                   },
-                  
-
-
-
-
-
-
-
-
-
-
-
-
-
-			ход: function(_параметры){  
-				$.ajax({
-					url:'/node/запрос',
-					type:'POST',
-					dataType:'json',
-					data:{
-						игрок: играХО.игрок,
-                                    ход:_параметры.клетка
-                                    
-					},
-					success: function(_ответ){
+		ход: function(_параметры){  
+			$.ajax({
+				url:'/node/запрос',
+				type:'POST',
+				dataType:'json',
+				data:{
+					игрок: играХО.игрок,
+					ход:_параметры.клетка
+				},
+				success: function(_ответ){
                                     номер;
-					}
-				});
-				
-			},
-			были_ходы:function(){
-			}
-		};
-		                                                                                           
-                          var игрок = new Boolean(true);  
-    $(document).ready(function(){   
-
-      $('#отправить').on('click',function(){ 
-            alert(document.getElementById("txt").value);
-
-	
-
-  });
-        
+				}
+			});
+		},
+		были_ходы:function(){
+		}
+	};
+	var игрок = new Boolean(true);  
+	$(document).ready(function(){   
+		$('#отправить').on('click',function(){ 
+		alert(document.getElementById("txt").value);
+	});
+      
         $('#x').on('click',function(){ 
-игрок=true;
-console.log(игрок);
-document.getElementById("индикатор").innerHTML = "X";
+		игрок=true;
+		console.log(игрок);
+		document.getElementById("индикатор").innerHTML = "X";
         });   
         $('#o').on('click',function(){ 
-игрок=false;
-console.log(игрок);
-document.getElementById("индикатор").innerHTML = "O";
-
+		игрок=false;
+		console.log(игрок);
+		document.getElementById("индикатор").innerHTML = "O";
         });   
-
-     $('.клетка').on('click',function(){ 
-           console.log("cletka click" + this);
-      var _клетка=$(this);
-      играХО.ход({клетка:_клетка.id});
-
-if(игрок==true){
-        document.getElementById(this.id).innerHTML = "X";
-}
-if(игрок==false){
-        document.getElementById(this.id).innerHTML = "O";
-        console.log(игрок);
-}
+	$('.клетка').on('click',function(){ 
+		console.log("cletka click" + this);
+      		var _клетка=$(this);
+      		играХО.ход({клетка:_клетка.id});
+		if(игрок==true){
+        		document.getElementById(this.id).innerHTML = "X";
+		}
+		if(игрок==false){
+        		document.getElementById(this.id).innerHTML = "O";
+        		console.log(игрок);
+		}
         });
-     
-         var чей_ход='';
-          var клетки={к1:'',к2:'',к3:'',к4:'',к5:'',к6:'',к7:'',к8:'',к9:''};
-              function старт(){
-                 if(чей_ход=="игрок1"){
-              
 
-
-                   }
-              }
-		           function ход(){
-
-
-
-                   }
-               function игра_окончена(){
-
-
-               }
-    });
+	var чей_ход='';
+	var клетки={к1:'',к2:'',к3:'',к4:'',к5:'',к6:'',к7:'',к8:'',к9:''};
+	function старт(){
+    		if(чей_ход=="игрок1"){
+                }
+        }
+	function ход(){
+	}
+	function игра_окончена(){
+	}
+	});// по-моемиу лишние закрывающие скобки
  
   
     </script>
-        
-        
-     
-        
-        
-        
-        
-    
-    <body>
-
+<body>
 <div class="поля_игр"></div>
        
      <div>вы играете за:</div>
